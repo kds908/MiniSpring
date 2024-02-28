@@ -6,12 +6,23 @@ package com.minis.bean;
  * @date 2024/2/27 16:13
  */
 public class PropertyValue {
+    private String type;
     private String name;
     private Object value;
+
+    public PropertyValue(String type, String name, Object value) {
+        this.type = type;
+        this.name = name;
+        this.value = value;
+    }
 
     public PropertyValue(String name, Object value) {
         this.name = name;
         this.value = value;
+    }
+
+    public String getType() {
+        return type;
     }
 
     public String getName() {
@@ -20,6 +31,10 @@ public class PropertyValue {
 
     public Object getValue() {
         return value;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public void setName(String name) {

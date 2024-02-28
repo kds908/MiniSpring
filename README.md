@@ -53,7 +53,7 @@ BeanFactory存在的意义是将创建对象与使用对象的业务代码解耦
       - 实现获取Bean的方法 getBean()，将Bean定义实例化并加载到内存中，同时对外提供获取查询
       - 实现注册BeanDefinition 方法，将Bean定义存入容器中
 
-ClassPathXmlApplicationContext 上下文，依然是集大成者
+ClassPathXmlApplicationContext 上下文，依然是集大成者：
 1. 解析xml文件中的内容
 2. 加载解析的内容，构建 BeanDefinition
 3. 读取 BeanDefinition 的配置信息，实例化 Bean，然后注入到 BeanFactory 容器中

@@ -1,5 +1,6 @@
 package com.minis.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,7 +9,10 @@ import java.util.List;
  * @date 2024/2/27 16:51
  */
 public class PropertyValues {
-    private List<PropertyValue> propertyValueList;
+    private List<PropertyValue> propertyValueList = new ArrayList<>();
+
+    public PropertyValues() {
+    }
 
     public PropertyValues(List<PropertyValue> propertyValueList) {
         this.propertyValueList = propertyValueList;
