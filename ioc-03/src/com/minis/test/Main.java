@@ -8,7 +8,5 @@ public class Main {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("beans.xml");
         AService aService = (AService) ctx.getBean("aService");
         aService.sayHello();
-        AService b = new AServiceImpl();
-        b.sayHello();
     }
 }

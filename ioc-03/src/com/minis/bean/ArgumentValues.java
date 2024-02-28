@@ -11,44 +11,24 @@ import java.util.Map;
  * @date 2024/2/27 16:16
  */
 public class ArgumentValues {
-    private Map<Integer, ArgumentValue> indexedArgumentValues = new HashMap<>();
-    private List<ArgumentValue> genericArgumentValues = new ArrayList<>();
+    private List<ArgumentValue> argumentValues = new ArrayList<>();
 
     public ArgumentValues() {
     }
 
-    private void addArgumentValue(Integer key, ArgumentValue newValue) {
-        this.indexedArgumentValues.put(key, newValue);
-    }
-
-    private boolean hasIndexedArgumentValue(int index) {
-        return this.indexedArgumentValues.containsKey(index);
+    public void addArgumentValue(ArgumentValue newValue) {
+        this.argumentValues.add(newValue);
     }
 
     public ArgumentValue getIndexedArgumentValue(int index) {
-        return this.indexedArgumentValues.get(index);
-    }
-
-    public void addGenericArgumentValue(ArgumentValue newValue) {
-        genericArgumentValues.removeIf(argumentValue ->
-                newValue.getName().equals(argumentValue.getName()));
-        this.genericArgumentValues.add(newValue);
-    }
-
-    public ArgumentValue getGenericArgumentValue(String requiredName) {
-        for (ArgumentValue valueHolder : this.genericArgumentValues) {
-            if (valueHolder.getName() != null && valueHolder.getName().equals(requiredName)) {
-                return valueHolder;
-            }
-        }
-        return null;
+        return this.argumentValues.get(index);
     }
 
     public int getArgumentCount() {
-        return this.genericArgumentValues.size();
+        return this.argumentValues.size();
     }
 
     public boolean isEmpty() {
-        return this.genericArgumentValues.isEmpty();
+        return this.argumentValues.isEmpty();
     }
 }
