@@ -106,3 +106,6 @@ Spring 在创建 Bean 的过程中，会根据 Bean 的定义配置生成 BeanDe
 4. 从保存的实例容器中找到只实例化的 ABean，取出给 CBean 注入属性，此时 CBean 完成属性注入。
 5. 将 CBean 注入 BBean。
 6. 将 BBean 注入 ABean。完成所有 Bean 的属性注入
+
+## 🏖️ ioc-04
+注解解释时机：注解作用在实例变量上，为了生效，首先必须创建好这个对象，也就是在 createBean 之后。
