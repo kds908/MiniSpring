@@ -91,5 +91,18 @@ IoC正好相反，框架来创建Bean，将Bean注入到调用者的业务中使
 
 因术语过于隐晦，引发很长时间争议，直到传奇人物 Martin Fowler 提出“依赖注入”（DI），“依赖注入”成为大家最常用的术语。
 其实依赖注入，是控制反转的一个具体的、常用的实现方式。控制反转是一种更为广泛的概念。
-![img3.png](doc/img/img3.png)
 
+**循环依赖**
+![img3.png](doc/img/img3.png)
+当 Spring 扫描到 ABean 时，解析它的内部属性，发现某个属性是另外一个 BBean，此时 Spring 还不存在实例 BBean，这时就要求 Spring 创建 ABean 的过程中，再去创建 BBean。
+BBean 可能又会依赖第三个 CBean，而 CBean 可能会反下来依赖 ABean。这样，就形成了循环依赖。
+
+Spring 在创建 Bean 的过程中，会根据 Bean 的定义配置生成 BeanDefinition，然后根据定义加载 Bean，然后进行实例化，最后在 Bean 中注入属性。
+即在属性注入前，Bean 的实例已经生成了，只不过还不是完整的实例，很多属性没有值。而循环依赖发生在属性注入这一阶段，因此，我们可以在实例化与属性注入这两个阶段之间，将这些已创建却没有注入属性
+的实例存储起来，在属性注入的时候使用。
+1. 实例化 ABean，此时属性未赋值，将实例保存备用。给 ABean 注入属性，此时需要依赖 BBean。
+2. 实例化 BBean，先将实例保存备用。给 BBean 注入属性，发现它依赖 CBean。
+3. 实例化 CBean，先将实例保存备用。给 CBean 注入属性，发现它反过来依赖 ABean。
+4. 从保存的实例容器中找到只实例化的 ABean，取出给 CBean 注入属性，此时 CBean 完成属性注入。
+5. 将 CBean 注入 BBean。
+6. 将 BBean 注入 ABean。完成所有 Bean 的属性注入
