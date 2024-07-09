@@ -1,9 +1,9 @@
 package com.minis.context;
 
-import com.minis.bean.factory.BeanFactory;
 import com.minis.bean.BeansException;
+import com.minis.bean.factory.BeanFactory;
 import com.minis.bean.factory.annotation.AutowiredAnnotationBeanPostProcessor;
-import com.minis.bean.factory.config.AutowiredCapableBeanFactory;
+import com.minis.bean.factory.config.AbstractAutowiredCapableBeanFactory;
 import com.minis.bean.factory.config.BeanFactoryPostProcessor;
 import com.minis.bean.factory.xml.XmlBeanDefinitionReader;
 import com.minis.core.ClassPathXmlResource;
@@ -19,7 +19,7 @@ import java.util.List;
  * 3. 读取 BeanDefinition 的配置信息，实例化 Bean，然后把它注入到 BeanFactory 容器中
  */
 public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationEventPublisher {
-    AutowiredCapableBeanFactory beanFactory;
+    AbstractAutowiredCapableBeanFactory beanFactory;
     private final List<BeanFactoryPostProcessor> beanFactoryPostProcessors = new ArrayList<>();
 
     public ClassPathXmlApplicationContext(String fileName) {
@@ -32,7 +32,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
      */
     public ClassPathXmlApplicationContext(String fileName, boolean isRefresh) {
         Resource resource = new ClassPathXmlResource(fileName);
-        AutowiredCapableBeanFactory factory = new AutowiredCapableBeanFactory();
+        AbstractAutowiredCapableBeanFactory factory = new AbstractAutowiredCapableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
         reader.loadBeanDefinition(resource);
         this.beanFactory = factory;
@@ -100,7 +100,7 @@ public class ClassPathXmlApplicationContext implements BeanFactory, ApplicationE
         onFresh();
     }
 
-    private void registerBeanPostProcessors(AutowiredCapableBeanFactory beanFactory) {
+    private void registerBeanPostProcessors(AbstractAutowiredCapableBeanFactory beanFactory) {
         beanFactory.addBeanPostProcessor(new AutowiredAnnotationBeanPostProcessor());
     }
 

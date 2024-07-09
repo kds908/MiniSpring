@@ -109,3 +109,12 @@ Spring 在创建 Bean 的过程中，会根据 Bean 的定义配置生成 BeanDe
 
 ## 🏖️ ioc-04
 注解解释时机：注解作用在实例变量上，为了生效，首先必须创建好这个对象，也就是在 createBean 之后。
+
+## 🏖 ioc-05
+1. 进一步增强扩展性
+   - ListableBeanFactory
+   - ConfigurableBeanFactory
+   - ConfigurableListableBeanFactory
+   - EnvironmentCapable
+2. 实现 DefaultListableBeanFactory, 此类是 Spring IOC 的引擎
+3. 改造 ApplicationContext

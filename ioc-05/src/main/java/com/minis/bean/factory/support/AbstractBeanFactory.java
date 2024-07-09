@@ -23,8 +23,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date: 2024/5/28 17:08
  */
 public abstract class AbstractBeanFactory extends DefaultSingletonBeanRegistry implements BeanFactory, BeanDefinitionRegistry {
-    private final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
-    private final List<String> beanDefinitionNames = new ArrayList<>();
+    protected final Map<String, BeanDefinition> beanDefinitionMap = new ConcurrentHashMap<>(256);
+    protected final List<String> beanDefinitionNames = new ArrayList<>();
     private final Map<String, Object> earlySingletonObjects = new HashMap<>(16);
 
     public AbstractBeanFactory() {
